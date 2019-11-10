@@ -507,9 +507,9 @@ Here is this structure-
 ```js
 module.exports = {
   promo: {
-    title: "Why does your business need AgencyCo?",
+    title: "Why does your business need AppCo?",
     description:
-      "Following reasons show advantages of adding AgencyCo to your lead pages, demos and checkouts",
+      "Following reasons show advantages of adding AppCo to your lead pages, demos and checkouts",
     items: [
       {
         title: "Keyword Rankings",

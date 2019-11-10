@@ -1,6 +1,6 @@
 # Template folder or project folder
 
-This section is about the AgencyCo react template File structure. I hope it will help to understand project files.
+This section is about the AppCo react template File structure. I hope it will help to understand project files.
 
 ```text
 agencyco-react

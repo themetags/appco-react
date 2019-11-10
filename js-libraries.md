@@ -1,5 +1,5 @@
 ### JS Libraries
-We would really love to take this opportunity to appreciate guys whose items were helpful to us to make **AgencyCo** a really beautiful template for our awesome users:
+We would really love to take this opportunity to appreciate guys whose items were helpful to us to make **AppCo** a really beautiful template for our awesome users:
 
 - [jQuery](https://jquery.com/download/)
 - [jQuery Easing](http://www.gsgd.co.uk/sandbox/jquery/easing/)
