@@ -431,7 +431,14 @@ Actions are payloads of information that send data from your application to your
 
 Here is our defined actions:
 ```js
-import { SUBMIT_CONTACT, POST_PROMO, GET_QUOTE } from '../constants/types.js';
+import { SUBSCRIBE, SUBMIT_CONTACT, POST_PROMO, GET_QUOTE } from '../constants/types.js';
+
+export const subscribe = (email) => {
+    return {
+        type: SUBSCRIBE,
+        email
+    };
+};
 
 export const submitContact = (contactData) => {
     return {
@@ -484,6 +491,63 @@ const contact = (state = [], action) => {
 
 export default contact;
 ```
+quote
+
+```js
+import { GET_QUOTE } from '../constants/types.js';
+
+const getQuoteData = (state, action) => {
+    switch (action.type) {
+        case GET_QUOTE:
+            return {
+                quoteData: action.quoteData
+            };
+        default:
+            return state;
+    }
+}
+
+const quote = (state = [], action) => {
+    switch (action.type) {
+        case GET_QUOTE:
+            return [...state, getQuoteData(undefined, action)];
+        default:
+            return state;
+    }
+};
+
+
+export default quote;
+```
+
+Subscribe 
+
+```js
+import { SUBSCRIBE } from '../constants/types.js';
+
+const getEmail = (state, action) => {
+    switch (action.type) {
+        case SUBSCRIBE:
+            return {
+                email: action.email
+            };
+        default:
+            return state;
+    }
+}
+
+const subscribe = (state = [], action) => {
+    switch (action.type) {
+        case SUBSCRIBE:
+            return [...state, getEmail(undefined, action)];
+        default:
+            return state;
+    }
+};
+
+
+export default subscribe;
+```
 
 We have combined all reducers by following:
 ```js
@@ -492,11 +556,15 @@ import contact from './contact';
 import promo from './promo';
 import quote from './quote';
 
+import subscribe from './subscribe';
+
 export default combineReducers({
+    subscribe,
     contact,
     promo,
     quote
 });
+
 
 ```
 
@@ -506,34 +574,40 @@ Here is this structure-
 
 ```js
 module.exports = {
-  promo: {
-    title: "Why does your business need AppCo?",
-    description:
-      "Following reasons show advantages of adding AppCo to your lead pages, demos and checkouts",
-    items: [
-      {
-        title: "Keyword Rankings",
-        description:
-          "Increase sales by showing true dynamics of your website. Build your online store’s using Social Proof & Urgency for your business.",
-        image: "img/service6.jpg"
-      },
-      {
-        title: "Backlink Analytics",
-        description:
-          "Build your online store’s trust using Social Proof & Urgency. Realize importance of social proof in customer’s purchase decision.",
-        image: "img/service2.jpg"
-      },
-      {
-        title: "Competitor Analysis",
-        description:
-          "Realize importance of social proof in customer’s purchase decision. Increase sales by showing true dynamics of your website.",
-        image: "img/service7.jpg"
-      }
-    ]
-  },
-  aboutUs: {
+  hero: {
+      title: "Brainstorming for desired perfect Usability",
+      description:
+        "Our design projects are fresh and simple and will benefit your business greatly. Learn more about our work!",
+      bgImage: "img/app-hero-bg.jpg"
+    },
+    promo: {
+      title: "Why small business owners love AppCo?",
+      description:
+        "Following reasons show advantages of adding AgencyCo to your lead pages, demos and checkouts",
+      items: [
+        {
+          title: "Clean Design",
+          description:
+            "Increase sales by showing true dynamics of your website",
+          icon: "ti-vector text-white"
+        },
+        {
+          title: "Secure Data",
+          description:
+            "Build your online store’s trust using Social Proof & Urgency",
+          icon: "ti-lock text-white"
+        },
+        {
+          title: "Retina Ready",
+          description:
+            "Realize importance of social proof in customer’s purchase decision",
+          icon: "ti-eye text-white"
+        }
+      ]
+    },
+    aboutUs: {
       ...
-  },
+    },
   ...
 };
 ```
