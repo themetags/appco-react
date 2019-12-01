@@ -1,6 +1,6 @@
 ### Support
 
-If you have any trouble while editing this template or if you simply want to ask a question about something, feel free to contact us at support@themetags.com or to post your request on Themeforest support form.
+If you have any trouble while editing this template or if you simply want to ask a question about something, feel free to contact us at hellothemetags@gmail.com or to post your request on Themeforest support form.
 
 #### Support includes
 
