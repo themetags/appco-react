@@ -90,10 +90,12 @@ This is `theme` folder structure-
     |-- theme2.js ( demo theme 2)
     .....
     |-- theme8.js ( demo theme eight )
-    |-- about-us.js ( about us page )
-    |-- services.js ( services page)
-    |-- pricing.js ( pricing page )
-    |-- contact.js ( contact page )
+    |-- login1.js ( login page )
+    |-- signup1.js ( signup page)
+    |-- 404.js ( 404 page )
+    |-- blog.js ( blog page )
+    |-- download.js ( download page )
+    ...
 ```
 
 `theme` folder contain all of our 8 demos with other single page like `services`, `about-us`
@@ -102,6 +104,8 @@ etc.
 
 ## routes
 In router section we used route js. where we linked all the route for our all theme. For routing we used react-router-dom.
+
+Routes: `routers/index.js`
 
 ```js
 import React from "react";
@@ -128,6 +132,23 @@ export default class Routes extends React.PureComponent {
             <Route exact path="/theme4" component={Theme4} />
             <Route exact path="/theme5" component={Theme5} />
             <Route exact path="/theme6" component={Theme6} />
+            <Route exact path="/login1" component={Login1} />
+            <Route exact path="/login2" component={Login2} />
+            <Route exact path="/signup1" component={SignUp1} />
+            <Route exact path="/signup2" component={SignUp2} />
+            <Route exact path="/resetPassword" component={ResetPassword} />
+            <Route exact path="/changePassword" component={ChangePassword} />
+            <Route exact path="/download" component={Download} />
+            <Route exact path="/review" component={Review} />
+            <Route exact path="/faq" component={Faq} />
+            <Route exact path="/404" component={NotFound} />
+            <Route exact path="/comingSoon" component={ComingSoon} />
+            <Route exact path="/thankyou" component={ThankYou} />
+            <Route exact path="/team" component={Team} />
+            <Route exact path="/singleTeam" component={SingleTeam} />
+            <Route exact path="/blog" component={Blog} />
+            <Route exact path="/blogLeft" component={BlogLeft} />
+            <Route exact path="/blogRight" component={BlogRight} />
           </Switch>
         </Router>
       </React.Fragment>
@@ -429,42 +450,98 @@ You can use Redux together with React, or with any other view library. It is tin
 ### actions
 Actions are payloads of information that send data from your application to your store. They are the only source of information for the store. You send them to the store using `store.dispatch()`.
 
-Here is our defined actions:
+Here is our defined actions: `actions/index.js`
 ```js
-import { SUBSCRIBE, SUBMIT_CONTACT, POST_PROMO, GET_QUOTE } from '../constants/types.js';
+import {
+  SUBSCRIBE,
+  SUBMIT_CONTACT,
+  POST_PROMO,
+  GET_QUOTE,
+  POST_LOGIN,
+  POST_SIGNUP,
+  POST_RESET_PASSWORD,
+  POST_CHANGE_PASSWORD,
+  GET_SEARCH,
+  POST_COMMENT,
+} from "../constants/types.js";
 
-export const subscribe = (email) => {
-    return {
-        type: SUBSCRIBE,
-        email
-    };
+export const subscribe = email => {
+  return {
+    type: SUBSCRIBE,
+    email,
+  };
 };
 
-export const submitContact = (contactData) => {
-    return {
-        type: SUBMIT_CONTACT,
-        contactData
-    };
+export const submitContact = contactData => {
+  return {
+    type: SUBMIT_CONTACT,
+    contactData,
+  };
 };
 
-export const postPromo = (promoData) => {
-    return {
-        type: POST_PROMO,
-        promoData
-    };
+export const postPromo = promoData => {
+  return {
+    type: POST_PROMO,
+    promoData,
+  };
 };
 
-export const getQuote = (quoteData) => {
-    return {
-        type: GET_QUOTE,
-        quoteData
-    };
+export const getQuote = quoteData => {
+  return {
+    type: GET_QUOTE,
+    quoteData,
+  };
 };
+
+export const login = loginData => {
+  return {
+    type: POST_LOGIN,
+    loginData,
+  };
+};
+
+export const signUp = signUpData => {
+  return {
+    type: POST_SIGNUP,
+    signUpData,
+  };
+};
+
+export const resetPassword = resetPasswordData => {
+  return {
+    type: POST_RESET_PASSWORD,
+    resetPasswordData,
+  };
+};
+
+export const changePassword = changePasswordData => {
+  return {
+    type: POST_CHANGE_PASSWORD,
+    changePasswordData,
+  };
+};
+
+export const search = searchData => {
+  return {
+    type: GET_SEARCH,
+    searchData,
+  };
+};
+
+export const comment = commentData => {
+  return {
+    type: POST_COMMENT,
+    commentData,
+  };
+};
+
 ```
 ### reducers
 Reducers specify how the application's state changes in response to actions sent to the store. Remember that actions only describe what happened, but don't describe how the application's state changes.
 
 Here is our reducer definition:
+
+Contact: `reducers/contact.js`
 ```js
 import { SUBMIT_CONTACT, POST_PROMO } from '../constants/types.js';
 
@@ -491,7 +568,7 @@ const contact = (state = [], action) => {
 
 export default contact;
 ```
-quote
+quote: `reducers/quote.js`
 
 ```js
 import { GET_QUOTE } from '../constants/types.js';
@@ -520,7 +597,7 @@ const quote = (state = [], action) => {
 export default quote;
 ```
 
-Subscribe 
+Subscribe: `reducers/subscribe.js` 
 
 ```js
 import { SUBSCRIBE } from '../constants/types.js';
@@ -549,21 +626,38 @@ const subscribe = (state = [], action) => {
 export default subscribe;
 ```
 
+We have more reducers in this reducers folder...
+
+
 We have combined all reducers by following:
+
+Reducer: `reducer/index.js`
 ```js
 import { combineReducers } from 'redux';
 import contact from './contact';
 import promo from './promo';
 import quote from './quote';
-
+import login from './login';
+import signup from './signup';
+import resetPassword from './resetPassword';
+import changePassword from './changePassword';
 import subscribe from './subscribe';
+import search from './search';
+import comment from './comment';
 
 export default combineReducers({
     subscribe,
     contact,
     promo,
-    quote
+    quote,
+    login,
+    signup,
+    resetPassword,
+    changePassword,
+    search,
+    comment,
 });
+
 
 
 ```
